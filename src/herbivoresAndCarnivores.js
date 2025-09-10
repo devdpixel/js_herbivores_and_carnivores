@@ -9,7 +9,6 @@ class Animal {
   }
 
   die() {
-    // Видаляємо тварин із здоров'ям ≤ 0 через фільтрацію масиву
     Animal.alive = Animal.alive.filter((a) => a.health > 0);
   }
 }
@@ -17,11 +16,6 @@ class Animal {
 Animal.alive = [];
 
 class Herbivore extends Animal {
-  constructor(name) {
-    super(name);
-    this.hidden = false;
-  }
-
   hide() {
     this.hidden = true;
   }
