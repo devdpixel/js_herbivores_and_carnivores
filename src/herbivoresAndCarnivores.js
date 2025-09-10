@@ -9,11 +9,8 @@ class Animal {
   }
 
   die() {
-    const index = Animal.alive.indexOf(this);
-
-    if (index !== -1) {
-      Animal.alive.splice(index, 1);
-    }
+    // Видаляємо тварин із здоров'ям ≤ 0 через фільтрацію масиву
+    Animal.alive = Animal.alive.filter((a) => a.health > 0);
   }
 }
 
@@ -32,18 +29,12 @@ class Herbivore extends Animal {
 
 class Carnivore extends Animal {
   bite(victim) {
-    if (!(victim instanceof Herbivore)) {
-      return;
-    }
+    if (victim instanceof Herbivore && !victim.hidden) {
+      victim.health -= 50;
 
-    if (victim.hidden) {
-      return;
-    }
-
-    victim.health -= 50;
-
-    if (victim.health <= 0) {
-      victim.die();
+      if (victim.health <= 0) {
+        victim.die();
+      }
     }
   }
 }
